@@ -45,15 +45,7 @@ class AuthController extends Controller
     public function update(Request $request)
 {
     try{
-        //Find the user object from model if it exists
-       // $user = User::findOrFail($request->email);
-
-        
-        //$user->name = $request->name; // Name of the input field here
-    // no validation implementedenter code here
-       // $user->save();
-       //$credentials = request(['email']);
-       //$user->email = $request->email;
+       
        $records = User::where('email', $request->email)->first();
        $records->name = $request->name;
        $records->save();
@@ -62,12 +54,25 @@ class AuthController extends Controller
             'message' => 'Successfully updated user!',
             
            'email' => $records
-            //'newname' => $user->name
+           
         ],201);    
     }
     catch(ModelNotFoundException $err){
         //Show error page
     }
+}
+/**
+ * display certain user
+ * @return [json] user object
+ */
+public function displaycertainuser($id)
+{
+    $records = User::where('id', $id)->first();
+   
+        return response()->json([
+            'user' => $records
+        ],201);
+    
 }
 /**
      * delete user
@@ -132,6 +137,20 @@ public function delete($id)
         return response()->json([
             'message' => 'Successfully logged out'
         ]);
+    }
+    /**
+     * Get all users
+     *
+     * @return [json] user object
+     * 
+     */
+    public function displayallusers(Request $request)
+    {
+        $records = User::all();
+        return response()->json([
+            'users'=>$records
+        ]);
+
     }
   
     /**
