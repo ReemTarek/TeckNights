@@ -15,6 +15,12 @@ class AuthController extends Controller
      * @param  [string] email
      * @param  [string] password
      * @param  [string] password_confirmation
+     * @param  [string] skills
+     * @param  [string] education
+     * @param  [string] gender
+     * @param  [integer] age
+     * @param  [string] experience
+     * @param  [string] interests
      * @return [string] message
      */
     public function signup(Request $request)
@@ -27,7 +33,13 @@ class AuthController extends Controller
         $user = new User([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => bcrypt($request->password)
+            'password' => bcrypt($request->password),
+            'skills' => $request->skills,
+            'education' =>$request->education,
+            'gender' =>$request->gender,
+             'age' =>$request->age,
+             'experience'=>$request->experience,
+             'interests'=>$request->interests
         ]);
         $user->save();
         return response()->json([
@@ -71,7 +83,7 @@ public function displaycertainuser($id)
    
         return response()->json([
             'user' => $records
-        ],201);
+        ],200);
     
 }
 /**
