@@ -18,6 +18,8 @@ Route::group([
     Route::post('login','AuthController@login');
     Route::post('signup','AuthController@signup');
     Route::post('update','AuthController@update');
+    Route::get('displayallusers','AuthController@displayallusers');
+    Route::get('displaycertainuser/{id}','AuthController@displaycertainuser');
     Route::delete('delete/{id}','AuthController@delete');
     Route::group([
         'middleware' => 'auth:api'
