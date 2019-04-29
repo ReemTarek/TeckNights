@@ -16,7 +16,7 @@ Route::group([
     'prefix'=>'auth'
 ],function(){
     Route::post('login','AuthController@login');
-    Route::post('signup','AuthController@signup');
+    Route::post('signup','AuthController@signup')->name('AuthController.signup');
     Route::post('update','AuthController@update');
     Route::get('displayallusers','AuthController@displayallusers');
     Route::get('displaycertainuser/{id}','AuthController@displaycertainuser');
